@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script src="index.js" defer></script>
+  </head>
+  <body
+    style="min-height: 100vh"
+    class="d-flex justify-content-center align-items-center"
+  >
+    <div
+      class="container w-50 mx-auto my-auto bg-body-tertiary border border-1 border-solid border-dark-subtle rounded-3 p-3"
+    >
+      <h2 class="h2 text-decoration-underline text-center">Calculator</h2>
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Number 1 :</label
+        >
+        <input class="form-control" id="exampleFormControlInput1" />
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label"
+          >Number 2 :</label
+        >
+        <input class="form-control" id="exampleFormControlTextArea1" />
+      </div>
+      <p class="lead" id="res"></p>
+      <div class="d-flex flex-wrap row-gap-3 column-gap-2">
+        <button class="btn btn-outline-primary" onclick="add()" id="add-btn">
+          Add
+        </button>
+        <button class="btn btn-outline-danger" onclick="pdt()" id="pdt-btn">
+          Multiply
+        </button>
+        <button class="btn btn-outline-secondary" onclick="mod()" id="pdt-btn">
+          Modulus
+        </button>
+        <button class="btn btn-outline-dark" onclick="neg()" id="pdt-btn">
+          Subtract
+        </button>
+        <button class="btn btn-outline-success" onclick="div()" id="pdt-btn">
+          Divide
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
