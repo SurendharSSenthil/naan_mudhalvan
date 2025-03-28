@@ -36,7 +36,7 @@ document.getElementById("form").addEventListener("submit", (event) => {
   const basicPay = parseFloat(document.getElementById("basic_pay").value);
 
   if (isNaN(basicPay) || basicPay <= 0) {
-    alert("Please enter a valid basic pay amount.");
+    showAlert("Please enter a valid basic pay amount.");
     return;
   }
 
@@ -51,8 +51,7 @@ document.getElementById("form").addEventListener("submit", (event) => {
     return element;
   };
 
-  displayContainer.appendChild(createInfoElement("p", `Employee Name: ${name}`, "fw-bold text-primary"));
-  displayContainer.appendChild(createInfoElement("p", `Designation: ${designation}`, "fw-bold text-secondary"));
+  displayContainer.appendChild(createInfoElement("p", `${name}, ${designation}`, "fw-sembold fs-3 text-center"));
   displayContainer.appendChild(createInfoElement("p", `HRA: ${calculateHRA(basicPay)}`, "text-success"));
   displayContainer.appendChild(createInfoElement("p", `DA: ${calculateDA(basicPay)}`, "text-info"));
   displayContainer.appendChild(createInfoElement("p", `PF: ${calculatePF(basicPay)}`, "text-danger"));
