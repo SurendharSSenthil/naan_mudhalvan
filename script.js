@@ -1,66 +1,61 @@
-function cal_HRA(basicpay) {
-    var hra = basicpay * 0.2;
-    console.log("The House Rent Allowance is", hra);
-    return hra;
+function calculateHRA(basicPay) {
+  const hra = basicPay * 0.2;
+  console.log("House Rent Allowance (HRA):", hra);
+  return hra;
 }
 
-function cal_DA(basicpay) {
-    var da = basicpay * 0.1;
-    console.log("The Dearness Allowance", da);
-    return da;
+function calculateDA(basicPay) {
+  const da = basicPay * 0.1;
+  console.log("Dearness Allowance (DA):", da);
+  return da;
 }
 
-function cal_PF(basicpay) {
-    var pf = basicpay * 0.12;
-    console.log("Provident Fund", pf);
-    return pf;
+function calculatePF(basicPay) {
+  const pf = basicPay * 0.12;
+  console.log("Provident Fund (PF):", pf);
+  return pf;
 }
 
-function cal_grosspay(basicpay) {
-    var gp = basicpay + cal_DA(basicpay) + cal_HRA(basicpay);
-    console.log("Gross Pay", gp);
-    return gp;
+function calculateGrossPay(basicPay) {
+  const grossPay = basicPay + calculateDA(basicPay) + calculateHRA(basicPay);
+  console.log("Gross Pay:", grossPay);
+  return grossPay;
 }
 
-function cal_netpay(basicpay) {
-    var np = cal_grosspay(basicpay) - cal_PF(basicpay);
-    console.log("Net Pay", np);
-    return np;
+function calculateNetPay(basicPay) {
+  const netPay = calculateGrossPay(basicPay) - calculatePF(basicPay);
+  console.log("Net Pay:", netPay);
+  return netPay;
 }
 
-const form = document.getElementById('form');
+document.getElementById("form").addEventListener("submit", (event) => {
+  event.preventDefault();
 
-form.addEventListener('submit', (event) => {
-    event.preventDefault(); // Prevents form from reloading the page
+  const name = document.getElementById("emp_name").value.trim();
+  const designation = document.getElementById("designation").value.trim();
+  const basicPay = parseFloat(document.getElementById("basic_pay").value);
 
-    const name = document.getElementById('emp_name').value;
-    const designation = document.getElementById('designation').value;
-    const basic_pay = parseFloat(document.getElementById('basic_pay').value);
+  if (isNaN(basicPay) || basicPay <= 0) {
+    alert("Please enter a valid basic pay amount.");
+    return;
+  }
 
-    if (isNaN(basic_pay)) {
-        alert("Please enter a valid basic pay amount.");
-        return;
-    }
+  const displayContainer = document.getElementById("disp");
+  displayContainer.innerHTML = "";
+  displayContainer.classList.add("card", "p-3", "mt-3", "shadow-sm");
 
-    const hra = document.createElement('p');
-    const da = document.createElement('p');
-    const pf = document.createElement('p'); 
-    const gp = document.createElement('p'); 
-    const np = document.createElement('p'); 
-    const disp = document.getElementById('disp');
+  const createInfoElement = (tag, text, classes) => {
+    const element = document.createElement(tag);
+    element.innerText = text;
+    element.className = classes;
+    return element;
+  };
 
-    hra.innerText = `HRA: ${cal_HRA(basic_pay)}`;
-    da.innerText = `DA: ${cal_DA(basic_pay)}`;
-    pf.innerText = `PF: ${cal_PF(basic_pay)}`;
-    gp.innerText = `Gross Pay: ${cal_grosspay(basic_pay)}`;
-    np.innerText = `Net Pay: ${cal_netpay(basic_pay)}`;
-
-    // Clear previous results before appending
-    disp.innerHTML = "";
-    
-    disp.appendChild(hra);
-    disp.appendChild(da);
-    disp.appendChild(pf);
-    disp.appendChild(gp);
-    disp.appendChild(np);
+  displayContainer.appendChild(createInfoElement("p", `Employee Name: ${name}`, "fw-bold text-primary"));
+  displayContainer.appendChild(createInfoElement("p", `Designation: ${designation}`, "fw-bold text-secondary"));
+  displayContainer.appendChild(createInfoElement("p", `HRA: ${calculateHRA(basicPay)}`, "text-success"));
+  displayContainer.appendChild(createInfoElement("p", `DA: ${calculateDA(basicPay)}`, "text-info"));
+  displayContainer.appendChild(createInfoElement("p", `PF: ${calculatePF(basicPay)}`, "text-danger"));
+  displayContainer.appendChild(createInfoElement("p", `Gross Pay: ${calculateGrossPay(basicPay)}`, "text-dark"));
+  displayContainer.appendChild(createInfoElement("p", `Net Pay: ${calculateNetPay(basicPay)}`, "text-warning"));
 });
